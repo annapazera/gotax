@@ -2,8 +2,8 @@ package main
 
 import (
 "fmt"
-"os"
 "strconv"
+    "net/http"
 )
 
 func main() {
@@ -55,7 +55,7 @@ var tax = func(salary float64) float64 {
 };
 
 
-param1 := os.Args[1]
+param1 := "123"
 
 fmt.Println(param1)
 
@@ -66,6 +66,31 @@ var podatek = tax(float64(salary))
 fmt.Println("tfuj podatek to");
 fmt.Println(podatek);
 
+
+    http.HandleFunc("/", func(w http.ResponseWriter,r  *http.Request) {
+
+
+        w.Header().Set("Content-Type", "text/html")
+
+
+        salary, _ := strconv.Atoi(r.URL.Query().Get("pensja"))
+
+        var podatek = tax(float64(salary))
+
+
+        pisz(w, fmt.Sprintf("Twoj podatek to %v", podatek))
+
+        pisz(w, "<form><input name='pensja'></form>")
+
+    })
+
+    http.ListenAndServe("0.0.0.0:9999", nil)
+
+
+}
+
+func pisz(w http.ResponseWriter, tekst string) {
+    w.Write([]byte(tekst))
 }
 
 

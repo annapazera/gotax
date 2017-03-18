@@ -63,7 +63,7 @@ fmt.Println(param1)
 salary, _ := strconv.Atoi(param1)
 
 var podatek = tax(float64(salary))
-
+fmt.Println("tfuj podatek to");
 fmt.Println(podatek);
 
 }

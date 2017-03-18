@@ -28,7 +28,7 @@ var stawki = []Próg{
     
 var tax = func(salary float64) float64 {
     
-            fmt.Println("sraka")
+            fmt.Println("sroka")
             
     var podatek float64 = 0;
     if(salary<stawki[0].próg){

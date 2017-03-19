@@ -10,14 +10,15 @@ func main() {
 
 	type Próg struct {
 		próg float64
+		stawka float64
 	}
 
 	var stawki = []Próg{
-		{próg: 6600},
-		{próg: 11000},
-		{próg: 85528},
-		{próg: 127000},
-		{próg: 0},
+		{stawka: 0, próg: 6600},
+		{stawka: 0.18, próg: 11000},
+		{stawka: 0.18, próg: 85528},
+		{stawka: 0.32, próg: 127000},
+		{stawka: 0.32, próg: 0},
 	}
 
 	var tax = func(salary float64) float64 {
@@ -26,23 +27,23 @@ func main() {
 
 		var podatek float64 = 0
 		if salary < stawki[0].próg {
-			podatek = 0.18*salary - 1188
+			podatek = stawki[1].stawka*salary - 1188
 			if podatek < 0 {
 				podatek = 0
 			}
 		}
 		if salary >= stawki[0].próg && salary < stawki[1].próg {
 			fmt.Println("zupa")
-			podatek = 0.18*salary - 1188 - 631.98*(salary-6600)/4400
+			podatek = stawki[1].stawka*salary - 1188 - 631.98*(salary-6600)/4400
 		}
 		if salary >= stawki[1].próg && salary < stawki[2].próg {
-			podatek = 0.18*salary - 556.02
+			podatek = stawki[1].stawka*salary - 556.02
 		}
 		if salary >= stawki[2].próg && salary < stawki[3].próg {
-			podatek = 15395.04 + 0.32*salary - 15395.04 - (556.02 - 556.02*(salary-85.528)/41472)
+			podatek = 15395.04 + stawki[3].stawka*salary - 15395.04 - (556.02 - 556.02*(salary-85.528)/41472)
 		}
 		if salary >= stawki[3].próg {
-			podatek = 0.32 * salary
+			podatek = stawki[3].stawka * salary
 		}
 
 		return podatek

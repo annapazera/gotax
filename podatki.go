@@ -32,7 +32,7 @@ func main() {
 			}
 		}
 		if salary >= stawki[0].próg && salary < stawki[1].próg {
-			fmt.Println("dupa")
+			fmt.Println("zupa")
 			podatek = 0.18*salary - 1188 - 631.98*(salary-6600)/4400
 		}
 		if salary >= stawki[1].próg && salary < stawki[2].próg {

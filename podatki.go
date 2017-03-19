@@ -55,7 +55,7 @@ func main() {
 	salary, _ := strconv.Atoi(param1)
 
 	var podatek = tax(float64(salary))
-	fmt.Println("tfuj podatek to")
+	fmt.Println("twoj podatek to")
 	fmt.Println(podatek)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

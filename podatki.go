@@ -49,7 +49,7 @@ func main() {
 		return podatek
 	}
 
-	param1 := "123"
+	param1 := "12223"
 
 	fmt.Println(param1)
 
@@ -58,6 +58,10 @@ func main() {
 	var podatek = tax(float64(salary))
 	fmt.Println("twoj podatek to")
 	fmt.Println(podatek)
+
+	var procentPensji = tax(float64(salary))/float64(salary)*100
+	fmt.Println("podatek jako procent pensji to")
+	fmt.Println(procentPensji)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
@@ -72,6 +76,8 @@ func main() {
 		pisz(w, "<form><input name='pensja'></form>")
 
 	})
+
+
 
 	http.ListenAndServe("0.0.0.0:9999", nil)
 

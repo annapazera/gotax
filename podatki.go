@@ -73,7 +73,7 @@ func main() {
 		var procentPensji = tax(float64(salary))/float64(salary)*100
 
 		pisz(w, fmt.Sprintf("Twoj podatek to %v", podatek))
-		pisz(w, fmt.Sprintf(".     Twoj procent pensji to %v", procentPensji))
+		pisz(w, fmt.Sprintf(".Twoj podatek jako procent pensji to %v", procentPensji))
 
 		pisz(w, "<form><input name='pensja'></form>")
 

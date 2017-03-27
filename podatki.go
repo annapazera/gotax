@@ -98,6 +98,35 @@ func main() {
 
 	})
 
+	http.HandleFunc("/podziel", func(w http.ResponseWriter, r *http.Request) {
+
+		w.Header().Set("Content-Type", "text/html")
+
+		dzielna, _ := strconv.Atoi(r.URL.Query().Get("dzielna"))
+		dzielnik, _ := strconv.Atoi(r.URL.Query().Get("dzielnik"))
+
+		wynik := dzielna/dzielnik
+
+		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
+
+		pisz(w, "<form><input name='dzielna'>/<input name='dzielnik'><input type='submit' value='Podziel'></form>")
+
+	})
+
+	http.HandleFunc("/pomnóż", func(w http.ResponseWriter, r *http.Request) {
+
+		w.Header().Set("Content-Type", "text/html")
+
+		mnożna, _ := strconv.Atoi(r.URL.Query().Get("mnożna"))
+		mnożnik, _ := strconv.Atoi(r.URL.Query().Get("mnożnik"))
+
+		wynik := mnożna*mnożnik
+
+		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
+
+		pisz(w, "<form><input name='mnożna'>*<input name='mnożnik'><input type='submit' value='Pomnóż'></form>")
+
+	})
 
 	http.ListenAndServe("0.0.0.0:9999", nil)
 

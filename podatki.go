@@ -80,6 +80,36 @@ func main() {
 	})
 
 
+	http.HandleFunc("/odejmij", func(w http.ResponseWriter, r *http.Request) {
+
+		w.Header().Set("Content-Type", "text/html")
+
+		odjemna, _ := strconv.Atoi(r.URL.Query().Get("odjemna"))
+		odjemnik, _ := strconv.Atoi(r.URL.Query().Get("odjemnik"))
+
+		wynik := odjemna - odjemnik;
+
+		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
+
+		pisz(w, "<form><input name='odjemna'>-<input name='odjemnik'><input type='submit' value='Odejmij'></form>")
+
+	})
+
+	http.HandleFunc("/dodaj", func(w http.ResponseWriter, r *http.Request) {
+
+		w.Header().Set("Content-Type", "text/html")
+
+		s1, _ := strconv.Atoi(r.URL.Query().Get("skladnik1"))
+		s2, _ := strconv.Atoi(r.URL.Query().Get("skladnik2"))
+
+		wynik := s1+s2
+
+		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
+
+		pisz(w, "<form><input name='skladnik1'>+<input name='skladnik2'><input type='submit' value='Dodaj'></form>")
+
+	})
+
 
 	http.ListenAndServe("0.0.0.0:9999", nil)
 

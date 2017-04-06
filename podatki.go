@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"html/template"
 )
 
 func main() {
@@ -76,11 +77,11 @@ func main() {
 		odjemnik, _ := strconv.Atoi(r.URL.Query().Get("odjemnik"))
 
 		wynik := odjemna - odjemnik;
-
-		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
-
-		pisz(w, "<form><input name='odjemna'>-<input name='odjemnik'><input type='submit' value='Odejmij'></form>")
-
+		template, err := template.ParseFiles("html/odejmowanie.html")
+		if err != nil  {
+			panic(err)
+		}
+		template.Execute(w, wynik)
 	})
 
 	http.HandleFunc("/dodaj", func(w http.ResponseWriter, r *http.Request) {

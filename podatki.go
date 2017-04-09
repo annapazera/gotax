@@ -93,10 +93,11 @@ func main() {
 
 		wynik := s1+s2
 
-		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
-
-		pisz(w, "<form><input name='skladnik1'>+<input name='skladnik2'><input type='submit' value='Dodaj'></form>")
-
+		template, err := template.ParseFiles("html/dodawanie.html")
+		if err != nil  {
+			panic(err)
+		}
+		template.Execute(w, wynik)
 	})
 
 	http.HandleFunc("/podziel", func(w http.ResponseWriter, r *http.Request) {

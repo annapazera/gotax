@@ -88,8 +88,8 @@ func main() {
 
 		w.Header().Set("Content-Type", "text/html")
 
-		s1, _ := strconv.Atoi(r.URL.Query().Get("skladnik1"))
-		s2, _ := strconv.Atoi(r.URL.Query().Get("skladnik2"))
+		s1, _ := strconv.Atoi(r.URL.Query().Get("s1"))
+		s2, _ := strconv.Atoi(r.URL.Query().Get("s2"))
 
 		wynik := s1+s2
 
@@ -107,7 +107,9 @@ func main() {
 		dzielna, _ := strconv.Atoi(r.URL.Query().Get("dzielna"))
 		dzielnik, _ := strconv.Atoi(r.URL.Query().Get("dzielnik"))
 
+		if (dzielnik==0){dzielnik=1}
 		wynik := dzielna/dzielnik
+
 
 		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
 
@@ -130,7 +132,7 @@ func main() {
 
 	})
 
-	http.ListenAndServe("0.0.0.0:9999", nil)
+	http.ListenAndServe("0.0.0.0:999", nil)
 
 }
 

@@ -93,11 +93,19 @@ func main() {
 
 		wynik := s1+s2
 
+		mapa :=  map[string]interface{} {}
+
+			mapa["dupa"]="kupa"
+		if wynik > 1000 {
+			mapa["dupa"]="MISZCZ!!!!"
+		}
+		mapa["wynik"]=wynik
+
 		template, err := template.ParseFiles("html/dodawanie.html")
 		if err != nil  {
 			panic(err)
 		}
-		template.Execute(w, wynik)
+		template.Execute(w, mapa)
 	})
 
 	http.HandleFunc("/podziel", func(w http.ResponseWriter, r *http.Request) {

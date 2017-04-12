@@ -4,23 +4,13 @@ import (
 	"fmt"
 )
 
-var (
-	shoppingCartAni  []Product
-	shoppingCartKasi []Product
-	shoppingCart     []Product
-	clients [] Client
-
-
-)
-
 type Product struct {
 	name  string
 	price int
 }
 
-type Client struct {
-	name string
-	nick string
+type ShoppingCart struct {
+	products []Product
 }
 
 func main2() {
@@ -29,47 +19,25 @@ func main2() {
 	product2 := createProduct("jacket", 500)
 	product3 := createProduct("T-shirt", 100)
 
-	shoppingCartAni := addProduct(product1)
-	fmt.Println("Zawartość koszyka Ani", shoppingCartAni)
 
-	shoppingCartAni = addProduct(product2)
-	fmt.Println("Zawartość koszyka Ani", shoppingCartAni)
-
-	shoppingCartAni = addProduct(product3)
-	fmt.Println("Zawartość koszyka Ani", shoppingCartAni)
-
-	shoppingCartKasi = addProduct(product3)
-	fmt.Println("Zawartość koszyka Kasi", shoppingCartKasi)
+	shoppingCart1 := ShoppingCart{}
+	shoppingCart1.addProduct(product1)
 
 
-	client1 := createClient("Jan Kowalski", "kowal")
-	client2 := createClient("Edmund Świerkowski", "świrek")
+	shoppingCart2 := ShoppingCart{}
 
-	clients := addClient(client1)
-	clients = addClient(client2)
+	shoppingCart2.addProduct(product2)
+	shoppingCart2.addProduct(product3)
+	shoppingCart2.addProduct(product1)
 
-	fmt.Println("Lista klientów: ", clients)
 
-	for _, v := range clients {
-		carts :=createShoppingCartForClient(v)
-
-	fmt.Println("ShoppingCart for Clients", carts)
-	}
-
+	fmt.Println("Shopping cart 1 : ", shoppingCart1)
+	fmt.Println("Shopping cart 2 : ", shoppingCart2)
 }
 
-func addProduct(product Product) []Product {
+func (sc *ShoppingCart) addProduct(product Product) {
+	sc.products = append(sc.products, product)
 
-	shoppingCart = append(shoppingCart, product)
-
-	return shoppingCart
-}
-
-func addClient(client Client) []Client {
-
-	clients = append(clients, client)
-
-	return clients
 }
 
 func createProduct(name string, price int) (product Product) {
@@ -77,18 +45,4 @@ func createProduct(name string, price int) (product Product) {
 	product = Product{name, price}
 
 	return product
-}
-
-func createClient(name string, nick string) (client Client) {
-
-	client = Client{name, nick}
-
-	return client
-}
-
-func createShoppingCartForClient  (client Client) ( shoppingCartForClient []Product) {
-
-	shoppingCartForClient = []Product {}
-
-	return shoppingCartForClient
 }

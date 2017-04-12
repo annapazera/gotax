@@ -1,16 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var (
 	shoppingCartAni  []Product
 	shoppingCartKasi []Product
 	shoppingCart     []Product
+	clients [] Client
+
+
 )
 
 type Product struct {
 	name  string
 	price int
+}
+
+type Client struct {
+	name string
+	nick string
 }
 
 func main() {
@@ -31,6 +41,21 @@ func main() {
 	shoppingCartKasi = addProduct(product3)
 	fmt.Println("Zawartość koszyka Kasi", shoppingCartKasi)
 
+
+	client1 := createClient("Jan Kowalski", "kowal")
+	client2 := createClient("Edmund Świerkowski", "świrek")
+
+	clients := addClient(client1)
+	clients = addClient(client2)
+
+	fmt.Println("Lista klientów: ", clients)
+
+	for _, v := range clients {
+		carts :=createShoppingCartForClient(v)
+
+	fmt.Println("ShoppingCart for Clients", carts)
+	}
+
 }
 
 func addProduct(product Product) []Product {
@@ -40,9 +65,30 @@ func addProduct(product Product) []Product {
 	return shoppingCart
 }
 
+func addClient(client Client) []Client {
+
+	clients = append(clients, client)
+
+	return clients
+}
+
 func createProduct(name string, price int) (product Product) {
 
 	product = Product{name, price}
 
 	return product
+}
+
+func createClient(name string, nick string) (client Client) {
+
+	client = Client{name, nick}
+
+	return client
+}
+
+func createShoppingCartForClient  (client Client) ( shoppingCartForClient []Product) {
+
+	shoppingCartForClient = []Product {}
+
+	return shoppingCartForClient
 }

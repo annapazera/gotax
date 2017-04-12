@@ -2,11 +2,10 @@ package main
 
 import "fmt"
 
-
 var (
-	shoppingCartAni []Product
+	shoppingCartAni  []Product
 	shoppingCartKasi []Product
-	shoppingCart []Product
+	shoppingCart     []Product
 )
 
 type Product struct {
@@ -16,38 +15,29 @@ type Product struct {
 
 func main() {
 
-
 	product1 := createProduct("shoes", 200)
 	product2 := createProduct("jacket", 500)
 	product3 := createProduct("T-shirt", 100)
 
-
-
-
-	addProduct(product1)
+	shoppingCartAni := addProduct(product1)
 	fmt.Println("Zawartość koszyka Ani", shoppingCartAni)
 
+	shoppingCartAni = addProduct(product2)
+	fmt.Println("Zawartość koszyka Ani", shoppingCartAni)
 
-	addProduct(product2)
-	fmt.Println("Zawartość koszyka Ani",shoppingCartAni)
+	shoppingCartAni = addProduct(product3)
+	fmt.Println("Zawartość koszyka Ani", shoppingCartAni)
 
-
-	addProduct(product3)
-	fmt.Println("Zawartość koszyka Ani",shoppingCartAni)
-
-	addProduct(product3)
-	fmt.Println("Zawartość koszyka Kasi",shoppingCartKasi)
-
+	shoppingCartKasi = addProduct(product3)
+	fmt.Println("Zawartość koszyka Kasi", shoppingCartKasi)
 
 }
 
-
-func addProduct(product Product)  {
-
+func addProduct(product Product) []Product {
 
 	shoppingCart = append(shoppingCart, product)
 
-
+	return shoppingCart
 }
 
 func createProduct(name string, price int) (product Product) {

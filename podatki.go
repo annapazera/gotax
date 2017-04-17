@@ -67,7 +67,21 @@ func main() {
 		pisz(w, "<form><input name='pensja'></form>")
 
 	})
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
+		w.Header().Set("Content-Type", "text/html")
+
+		składniki, _ := strconv.Atoi(r.URL.Query().Get("składniki"))
+
+		var składniki = tax(float64(salary))
+
+
+		pisz(w, fmt.Sprintf("Twoje składniki to", składniki))
+
+
+		pisz(w, "<form><input name='składniki'></form>")
+
+	})
 
 	http.HandleFunc("/odejmij", func(w http.ResponseWriter, r *http.Request) {
 
@@ -140,7 +154,7 @@ func main() {
 
 	})
 
-	http.ListenAndServe("0.0.0.0:999", nil)
+	http.ListenAndServe("0.0.0.0:9999", nil)
 
 }
 

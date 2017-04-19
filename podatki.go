@@ -8,6 +8,10 @@ import (
 	"strconv"
 )
 
+
+
+var składniki string
+
 func main() {
 
 	type Próg struct {
@@ -68,15 +72,16 @@ func main() {
 	})
 	http.HandleFunc("/sklep", func(w http.ResponseWriter, r *http.Request) {
 
-		w.Header().Set("Content-Type", "text/html")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-		//składniki, _ := strconv.Atoi(r.URL.Query().Get("składniki"))
+		składnik := r.URL.Query().Get("składnik")
 
-		var składniki = tax(float64(1125))
+		składniki += składnik +" "
 
-		pisz(w, fmt.Sprintf("Twoje składniki to", składniki))
+		pisz(w, fmt.Sprintf("Twoje składniki to %s.", składniki))
 
-		pisz(w, "<form><input name='składniki'></form>")
+
+		pisz(w, "<form><input name='składnik'></form>")
 
 	})
 

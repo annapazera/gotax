@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"strconv"
 	"html/template"
+	"net/http"
+	"os"
+	"strconv"
 )
 
 func main() {
 
 	type Próg struct {
-		próg float64
+		próg   float64
 		stawka float64
 	}
 
@@ -50,8 +51,6 @@ func main() {
 		return podatek
 	}
 
-
-
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Type", "text/html")
@@ -59,7 +58,7 @@ func main() {
 		salary, _ := strconv.Atoi(r.URL.Query().Get("pensja"))
 
 		var podatek = tax(float64(salary))
-		var procentPensji = tax(float64(salary))/float64(salary)*100
+		var procentPensji = tax(float64(salary)) / float64(salary) * 100
 
 		pisz(w, fmt.Sprintf("Twoj podatek to %v", podatek))
 		pisz(w, fmt.Sprintf(".Twoj podatek jako procent pensji to %v", procentPensji))
@@ -75,9 +74,7 @@ func main() {
 
 		var składniki = tax(float64(1125))
 
-
 		pisz(w, fmt.Sprintf("Twoje składniki to", składniki))
-
 
 		pisz(w, "<form><input name='składniki'></form>")
 
@@ -90,9 +87,9 @@ func main() {
 		odjemna, _ := strconv.Atoi(r.URL.Query().Get("odjemna"))
 		odjemnik, _ := strconv.Atoi(r.URL.Query().Get("odjemnik"))
 
-		wynik := odjemna - odjemnik;
+		wynik := odjemna - odjemnik
 		template, err := template.ParseFiles("html/odejmowanie.html")
-		if err != nil  {
+		if err != nil {
 			panic(err)
 		}
 		template.Execute(w, wynik)
@@ -105,18 +102,18 @@ func main() {
 		s1, _ := strconv.Atoi(r.URL.Query().Get("s1"))
 		s2, _ := strconv.Atoi(r.URL.Query().Get("s2"))
 
-		wynik := s1+s2
+		wynik := s1 + s2
 
-		mapa :=  map[string]interface{} {}
+		mapa := map[string]interface{}{}
 
-			mapa["dupa"]="kupa"
+		mapa["dupa"] = "kupa"
 		if wynik > 1000 {
-			mapa["dupa"]="MISZCZ!!!!"
+			mapa["dupa"] = "MISZCZ!!!!"
 		}
-		mapa["wynik"]=wynik
+		mapa["wynik"] = wynik
 
 		template, err := template.ParseFiles("html/dodawanie.html")
-		if err != nil  {
+		if err != nil {
 			panic(err)
 		}
 		template.Execute(w, mapa)
@@ -129,9 +126,10 @@ func main() {
 		dzielna, _ := strconv.Atoi(r.URL.Query().Get("dzielna"))
 		dzielnik, _ := strconv.Atoi(r.URL.Query().Get("dzielnik"))
 
-		if (dzielnik==0){dzielnik=1}
-		wynik := dzielna/dzielnik
-
+		if dzielnik == 0 {
+			dzielnik = 1
+		}
+		wynik := dzielna / dzielnik
 
 		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
 
@@ -146,7 +144,7 @@ func main() {
 		mnożna, _ := strconv.Atoi(r.URL.Query().Get("mnożna"))
 		mnożnik, _ := strconv.Atoi(r.URL.Query().Get("mnożnik"))
 
-		wynik := mnożna*mnożnik
+		wynik := mnożna * mnożnik
 
 		pisz(w, fmt.Sprintf("Twoj wynik to %v", wynik))
 
@@ -154,7 +152,11 @@ func main() {
 
 	})
 
-	http.ListenAndServe("0.0.0.0:9999", nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9999"
+	}
+	http.ListenAndServe("0.0.0.0:"+port, nil)
 
 }
 

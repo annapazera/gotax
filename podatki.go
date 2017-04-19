@@ -11,6 +11,7 @@ import (
 
 
 var składniki string
+var zarobki int
 
 func main() {
 
@@ -84,7 +85,19 @@ func main() {
 		pisz(w, "<form><input name='składnik'></form>")
 
 	})
+	http.HandleFunc("/sklep2", func(w http.ResponseWriter, r *http.Request) {
 
+		w.Header().Set("Content-Type", "text/html")
+
+		zarobek, _ := strconv.Atoi(r.URL.Query().Get("zarobek"))
+		zarobek2, _ := strconv.Atoi(r.URL.Query().Get("zarobek2"))
+		zarobki += zarobek+zarobek2
+
+		pisz(w, fmt.Sprintf("Twoje zarobki to %v.", składniki))
+
+		pisz(w, "<form><input name='zarobek'></form>")
+		
+	})
 	http.HandleFunc("/odejmij", func(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Type", "text/html")

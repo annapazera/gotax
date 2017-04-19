@@ -23,7 +23,7 @@ type Client struct {
 	nick string
 }
 
-func main() {
+func main2() {
 
 	product1 := createProduct("shoes", 200)
 	product2 := createProduct("jacket", 500)

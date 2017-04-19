@@ -71,9 +71,9 @@ func main() {
 
 		w.Header().Set("Content-Type", "text/html")
 
-		składniki, _ := strconv.Atoi(r.URL.Query().Get("składniki"))
+		//składniki, _ := strconv.Atoi(r.URL.Query().Get("składniki"))
 
-		var składniki = tax(float64(salary))
+		var składniki = tax(float64(1125))
 
 
 		pisz(w, fmt.Sprintf("Twoje składniki to", składniki))

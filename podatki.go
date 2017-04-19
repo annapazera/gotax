@@ -66,7 +66,7 @@ func main() {
 		pisz(w, "<form><input name='pensja'></form>")
 
 	})
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/sklep", func(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Type", "text/html")
 

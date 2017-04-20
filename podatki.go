@@ -93,10 +93,10 @@ func main() {
 		zarobek2, _ := strconv.Atoi(r.URL.Query().Get("zarobek2"))
 		zarobki += zarobek+zarobek2
 
-		pisz(w, fmt.Sprintf("Twoje zarobki to %v.", składniki))
+		pisz(w, fmt.Sprintf("Twoje zarobki to %v.", zarobki))
 
 		pisz(w, "<form><input name='zarobek'></form>")
-		
+
 	})
 	http.HandleFunc("/odejmij", func(w http.ResponseWriter, r *http.Request) {
 

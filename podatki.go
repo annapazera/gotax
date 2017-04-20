@@ -90,8 +90,8 @@ func main() {
 		w.Header().Set("Content-Type", "text/html")
 
 		zarobek, _ := strconv.Atoi(r.URL.Query().Get("zarobek"))
-		zarobek2, _ := strconv.Atoi(r.URL.Query().Get("zarobek2"))
-		zarobki += zarobek+zarobek2
+
+		zarobki += zarobek
 
 		pisz(w, fmt.Sprintf("Twoje zarobki to %v.", zarobki))
 
